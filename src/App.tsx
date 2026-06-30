@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 
 export default function App() {
-  const redirectUrl = "https://wa.me/message/QTQQEN3GI5CWF1";
+  const redirectUrl = "https://wa.me/551151927221?text=Ol%C3%A1%2C%20quero%20fazer%20um%20pedido.";
 
   // State management
   const [timeLeft, setTimeLeft] = useState<number>(5);
