@@ -19,9 +19,10 @@ export default function App() {
   const triggerRedirect = (isManual: boolean = false) => {
     try {
       if (typeof window !== "undefined" && (window as any).fbq) {
-        console.log("Disparando eventos do Meta Pixel: Lead e Contact para campanha do WhatsApp de Giovanni Fornecedor...");
+        console.log("Disparando eventos do Meta Pixel: Lead, Contact e ViewContent para campanha de Giovanni Fornecedor...");
         (window as any).fbq("track", "Lead");
         (window as any).fbq("track", "Contact");
+        (window as any).fbq("track", "ViewContent");
       }
     } catch (error) {
       console.error("Erro ao disparar evento do Meta Pixel:", error);
@@ -42,6 +43,16 @@ export default function App() {
   const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
+    // Fire PageView and ViewContent immediately on mount in addition to the index.html script
+    try {
+      if (typeof window !== "undefined" && (window as any).fbq) {
+        (window as any).fbq("track", "PageView");
+        (window as any).fbq("track", "ViewContent");
+      }
+    } catch (e) {
+      console.error("Erro ao disparar Pixel inicial:", e);
+    }
+
     // Progress bar animation interval (runs every 30ms for 5 seconds total)
     const totalDuration = 5000; 
     const updateInterval = 30; 
